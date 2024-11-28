@@ -1,0 +1,12 @@
+{
+  "name": "chrome-launcher",
+  "version": "1.0.0",
+  "description": "Chrome Launcher",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^25.0.0"
+  }
+}
