@@ -1,14 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Electron App</title>
+  <title>Chrome Launcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Parkinsans:wght@300..800&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <style>
+    html, body, main {
+      padding: 0;
+      margin: 0;
+      background-color: #f0f4f9;
+      font-family: "Parkinsans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 50vh;
+      transform: translateY(-50%);
+    }
+
+    button {
+      --button-padding: 12px;
+      --button-gap: 6px;
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--button-gap);
+      position: relative;
+      padding: var(--button-padding);
+      border-radius: 6px;
+      background-color: var(--color-opacity, #00000066);
+      border-color: var(--color, #000000);
+      transition: all 0.25s;
+
+      &:hover {
+        background-color: var(--color);
+        box-shadow: 0 0 8px 1px rgb(0 0 0 / 0.3);
+        scale: 1.03;
+      }
+      &:active {
+        background-color: var(--color-opacity);
+        box-shadow: none;
+        scale: 0.97;
+        border: none;
+      }
+    }
+    button > .title,
+    button > img {
+      --size: 150px;
+      width: var(--size);
+      margin: 0;
+      padding: 0;
+      max-width: var(--size);
+    }
+    .title {
+      text-wrap: balance;
+      font-weight: 500;
+    }
+    .image-psat,
+    .image-cookie {
+      --size: 50px;
+    }
+    .image-psat {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+    }
+    .image-cookie {
+      position: absolute;
+      left: 50%;
+      top: calc(50% - var(--button-padding) - var(--button-gap));
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0px 3px 2px rgb(0 0 0 / 0.3))
+    }
+    [id*='3pcd'] {
+      --color: #4caf50;
+      --color-opacity: #4caf5066;
+    }
+    [id*='default'] {
+      --color: #f44336;
+      --color-opacity: #f4433666;
+    }
+  </style>
 </head>
 <body>
-  <button id="'default">'default</button>
-  <button id="'3pcd">'3pcd</button>
-  <button id="default-ps">default-ps</button>
-  <button id="3pcd-ps">3pcd-ps</button>
 
-  <!-- <script src="renderer.js"></script> -->
+  <main>
+    <button id="default">
+      <img class='image-chrome' src='./images/chrome-logo.svg' />
+      <img class='image-cookie' src='./images/cookie.svg' />
+      <span class='title'>Chrome Default</span>
+    </button>
+    
+    <button id="3pcd">
+      <img class='image-chrome' src='./images/chrome-logo.svg' />
+      <img class='image-cookie' src='./images/cookie-off.svg' />
+      <span class='title'>Chrome w/ Disabled Cookies</span>
+    </button>
+  
+    <button id="default-ps">
+      <img class='image-chrome' src='./images/chrome-logo.svg' />
+      <img class='image-psat' src='./images/psat-logo.svg' />
+      <img class='image-cookie' src='./images/cookie.svg' />
+      <span class='title'>Chrome w/ PSAT</span>
+    </button>
+    
+    <button id="3pcd-ps">
+      <img class='image-chrome' src='./images/chrome-logo.svg' />
+      <img class='image-psat' src='./images/psat-logo.svg' />
+      <img class='image-cookie' src='./images/cookie-off.svg' />
+      <span class='title'>Chrome w/ PSAT & Disabled Cookies</span>
+    </button>
+  </main>
+  
+  <script src="./renderer.js"></script>
 </body>
 </html>

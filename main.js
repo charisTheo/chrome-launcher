@@ -1,5 +1,10 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
+const fs = require('fs');
+
+try {
+  require('electron-reloader')(module)
+} catch (_) {}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -45,29 +50,23 @@ app.on('activate', () => {
   }
 });
 
-// In renderer.js
-const { ipcRenderer } = require('electron');
+function getShellPath() {
+  return new Promise((res) => {
+    exec(`echo $SHELL`, (error, stdout) => {
+      res(stdout.trim())
+    })
+  })
+}
 
-window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('default').addEventListener('click', () => {
-    ipcRenderer.send('run-command', 'chrome-default');
-  });
-  
-  document.getElementById('3pcd').addEventListener('click', () => {
-    ipcRenderer.send('run-command', 'chrome-3pcd');
-  });
-  
-  document.getElementById('default-ps').addEventListener('click', () => {
-    ipcRenderer.send('run-command', 'chrome-default-ps');
-  });
-  
-  document.getElementById('3pcd-ps').addEventListener('click', () => {
-    ipcRenderer.send('run-command', 'chrome-3pcd-ps');
-  });
-})
+function getShellProfileFilenameFromPath(shellPath) {
+  return `.${shellPath.split('/bin/').pop().trim()}rc`
+}
 
-ipcRenderer.on('run-script', (event, command) => {
-  exec(command, (error, stdout, stderr) => {
+ipcMain.on('run-command', async (event, command) => {
+  const shellPath = await getShellPath()
+  const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
+
+  exec(`source ~/${shellProfileFilename} && ${command}`, { shell: shellPath }, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing script: ${error}`);
       return;
