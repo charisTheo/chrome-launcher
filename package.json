@@ -12,7 +12,6 @@
   "devDependencies": {
     "@electron-forge/cli": "^7.6.0",
     "@electron-forge/maker-deb": "^7.6.0",
-    "@electron-forge/maker-rpm": "^7.6.0",
     "@electron-forge/maker-zip": "^7.6.0",
     "@electron-forge/publisher-github": "^7.6.0",
     "electron": "^25.0.0",
@@ -45,12 +44,6 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {
-            "name": "chrome_launcher"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
           "config": {
             "name": "chrome_launcher"
           }
