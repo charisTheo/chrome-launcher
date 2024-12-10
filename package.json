@@ -20,7 +20,6 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "name": "Chrome Launcher",
         "executableName": "chrome_launcher",
         "arch": "arm64"
       },
