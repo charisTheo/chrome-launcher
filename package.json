@@ -20,7 +20,8 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "name": "Chrome Launcher"
+        "name": "Chrome Launcher",
+        "executableName": "chrome_launcher"
       },
       "publishers": [
         {
