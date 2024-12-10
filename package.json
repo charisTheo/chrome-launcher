@@ -19,7 +19,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "name": "Chrome Launcher"
+      },
       "publishers": [
         {
           "name": "@electron-forge/publisher-github",
