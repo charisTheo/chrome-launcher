@@ -4,10 +4,49 @@
   "description": "Chrome Launcher",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/maker-dmg": "^7.6.0",
+    "@electron-forge/maker-zip": "^7.6.0",
+    "@electron-forge/publisher-github": "^7.6.0",
     "electron": "^25.0.0",
     "electron-reloader": "^1.2.3"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "executableName": "chrome_launcher"
+      },
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "charisTheo",
+              "name": "chrome-launcher"
+            },
+            "prerelease": true
+          }
+        }
+      ],
+      "makers": [
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "name": "chrome_launcher",
+            "productName": "chrome_launcher"
+          }
+        }
+      ]
+    }
+  },
+  "optionalDependencies": {
+    "appdmg": "^0.6.6"
   }
 }
