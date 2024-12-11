@@ -43,7 +43,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}-${{ matrix.arch }}-app
+          name: ${{ matrix.os }}-${{ matrix.arch }}
           path: out/
 
   release:
