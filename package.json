@@ -42,20 +42,6 @@
             "name": "chrome_launcher",
             "productName": "chrome_launcher"
           }
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {
-            "name": "chrome_launcher",
-            "productName": "chrome_launcher"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin",
-            "linux"
-          ]
         }
       ]
     }
