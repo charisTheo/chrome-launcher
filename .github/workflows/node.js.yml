@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test-github-action
   pull_request:
     branches: 
       - develop
@@ -49,8 +50,5 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            out/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
