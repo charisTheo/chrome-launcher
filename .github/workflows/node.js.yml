@@ -47,8 +47,12 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
 
       - name: Release
         uses: softprops/action-gh-release@v1
+        with:
+          path: release-artifacts/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
