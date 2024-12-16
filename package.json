@@ -1,6 +1,6 @@
 {
   "name": "chrome-launcher",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Chrome Launcher",
   "main": "main.js",
   "scripts": {
