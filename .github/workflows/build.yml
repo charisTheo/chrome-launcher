@@ -55,12 +55,14 @@ jobs:
         with: 
           path: artifacts
 
-      - name: Display structure of downloaded files
-        run: ls -R
+      - name: Zip folders
+        run: |
+          zip -r artifacts/macos-latest-arm64 macOS-ARM
+          zip -r artifacts/macos-latest-x64 macOS-Intel
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/macos-latest-arm64/chrome-launcher-darwin-arm64/chrome-launcher.app
-            artifacts/macos-latest-x64/chrome-launcher-darwin-arm64/chrome-launcher.app
+            macOS-ARM
+            macOS-Intel
