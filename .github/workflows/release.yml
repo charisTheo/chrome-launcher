@@ -18,11 +18,7 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # if: startsWith(github.ref, 'refs/tags/')
     steps:
-      - name: Echo Github Ref
-        run: echo "$GITHUB_REF" && echo ${{ github.ref }}
-
       - name: Download artifacts
         uses: actions/download-artifact@v4
 
