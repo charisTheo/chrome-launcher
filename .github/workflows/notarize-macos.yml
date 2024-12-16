@@ -1,4 +1,4 @@
-name: Notarize macOS App
+name: notarize
 
 on:
   workflow_run:
