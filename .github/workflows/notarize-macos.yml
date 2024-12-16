@@ -1,0 +1,36 @@
+name: Notarize macOS App
+
+on:
+  workflow_run:
+    workflows: ['Build Electron App']
+    types:
+      - completed
+    branches:
+      - main
+      - test-github-action
+
+jobs:
+  notarize:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: macos-x64-app 
+
+      - name: Notarize the app
+        run: |
+          xcrun altool --notarize-app \
+            --primary-bundle-id "your.app.bundle.id" \
+            --username "${{ secrets.APPLE_ID }}" \
+            --password "${{ secrets.APP_SPECIFIC_PASSWORD }}" \
+            --file "out/**/make/*.dmg" 
+        env:
+          AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
+
+      - name: Staple the notarization ticket
+        run: |
+          xcrun stapler staple "out/**/make/*.dmg"
