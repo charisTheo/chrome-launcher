@@ -58,3 +58,7 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            macos-latest-arm64/make/*.dmg
+            macos-latest-x64/make/*.dmg
