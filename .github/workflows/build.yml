@@ -61,4 +61,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: artifacts/*
+          files: |
+            artifacts/macos-latest-arm64/chrome-launcher-darwin-arm64/chrome-launcher.app
+            artifacts/macos-latest-x64/chrome-launcher-darwin-arm64/chrome-launcher.app
