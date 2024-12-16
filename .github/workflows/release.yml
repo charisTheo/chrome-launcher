@@ -1,16 +1,14 @@
-name: Release Electron App
+name: release
 
 permissions:
   contents: write
 
 on:
   workflow_run:
-    # TODO update to 'Notarize macOS App'
-    workflows: ['Build Electron App']
-    types:
-      - completed
-    branches:
-      - main
+    # TODO update to 'notarize'
+    workflows: [build]
+    types: [completed]
+    branches: [main]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
