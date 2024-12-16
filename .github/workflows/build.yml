@@ -52,6 +52,8 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
+        with: 
+          path: artifacts
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -60,5 +62,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            macos-latest-arm64/make/*.dmg
-            macos-latest-x64/make/*.dmg
+            artifacts/macos-latest-arm64/make/*.dmg
+            artifacts/macos-latest-x64/make/*.dmg
