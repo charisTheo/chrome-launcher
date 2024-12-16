@@ -6,7 +6,7 @@ permissions:
 on:
   workflow_run:
     # TODO update to 'notarize'
-    workflows: [build]
+    workflows: ["build"]
     types: [completed]
     branches: [main]
 
