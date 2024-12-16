@@ -1,15 +1,13 @@
 name: release
 
-permissions:
-  contents: write
-
 on:
   workflow_run:
-    # TODO update to 'notarize'
-    workflows: 
-      - build
+    workflows: [build]
     types: [completed]
     branches: [main]
+
+permissions:
+  contents: write
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
