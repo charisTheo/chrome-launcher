@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
+        with:
+          name: out/**
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: Release
         uses: softprops/action-gh-release@v1
