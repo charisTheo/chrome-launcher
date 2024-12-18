@@ -57,8 +57,8 @@ jobs:
 
       - name: Zip folders
         run: |
-          zip -r macOS-ARM.zip artifacts/macos-latest-arm64
-          zip -r macOS-Intel.zip artifacts/macos-latest-x64
+          zip -r macOS-ARM.zip artifacts/macos-latest-arm64/make
+          zip -r macOS-Intel.zip artifacts/macos-latest-x64/make
 
       - name: Release
         uses: softprops/action-gh-release@v1
