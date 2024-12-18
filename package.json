@@ -21,7 +21,8 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "executableName": "chrome_launcher"
+        "executableName": "chrome_launcher",
+        "appBundleId": "com.charistheo.chromelauncher"
       },
       "publishers": [
         {

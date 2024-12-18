@@ -2,11 +2,11 @@ name: notarize
 
 on:
   workflow_run:
-    workflows: ['Build Electron App']
+    workflows: [build]
     types:
       - completed
-    branches:
-      - main
+    # branches:
+      # - main
 
 jobs:
   notarize:
@@ -23,12 +23,11 @@ jobs:
       - name: Notarize the app
         run: |
           xcrun altool --notarize-app \
-            --primary-bundle-id "your.app.bundle.id" \
+            --primary-bundle-id "com.charistheo.chromelauncher" \
             --username "${{ secrets.APPLE_ID }}" \
             --password "${{ secrets.APP_SPECIFIC_PASSWORD }}" \
+            --team-id "${{ secrets.APPLE_TEAM_ID }}" \
             --file "out/**/make/*.dmg" 
-        env:
-          AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
 
       - name: Staple the notarization ticket
         run: |
