@@ -15,38 +15,9 @@
     "@electron-forge/maker-dmg": "^7.6.0",
     "@electron-forge/maker-zip": "^7.6.0",
     "@electron-forge/publisher-github": "^7.6.0",
+    "dotenv": "^16.4.7",
     "electron": "^25.0.0",
     "electron-reloader": "^1.2.3"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "executableName": "chrome_launcher",
-        "appBundleId": "com.charistheo.chromelauncher",
-        "osxSign": {}
-      },
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "charisTheo",
-              "name": "chrome-launcher"
-            },
-            "prerelease": true
-          }
-        }
-      ],
-      "makers": [
-        {
-          "name": "@electron-forge/maker-dmg",
-          "config": {
-            "name": "chrome_launcher",
-            "productName": "chrome_launcher"
-          }
-        }
-      ]
-    }
   },
   "optionalDependencies": {
     "appdmg": "^0.6.6"
