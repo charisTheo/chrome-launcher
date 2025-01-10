@@ -33,7 +33,8 @@ module.exports = {
       config: {
         icon: APP_ICON_PATH + '.icns',
         name: "chrome_launcher",
-        productName: "chrome_launcher"
+        productName: "Chrome Launcher",
+        title: "Chrome Launcher",
       }
     }
   ]
