@@ -14,6 +14,7 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
     },
+    icon: './images/icon.png' // additional app icon config for Linux machines
   });
 
   win.loadFile('index.html');

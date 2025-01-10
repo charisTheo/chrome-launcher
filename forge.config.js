@@ -1,7 +1,12 @@
 require('dotenv').config()
+const path = require('path')
+
+const APP_ICON_PATH = path.join(process.cwd(), "images", "icon")
 
 module.exports = {
   packagerConfig: {
+    icon: APP_ICON_PATH,
+    extraResource: [APP_ICON_PATH + '.icns'],
     executableName: "chrome_launcher",
     appBundleId: "com.charistheo.chromelauncher",
     osxSign: {},
@@ -26,6 +31,7 @@ module.exports = {
     {
       name: "@electron-forge/maker-dmg",
       config: {
+        icon: APP_ICON_PATH + '.icns',
         name: "chrome_launcher",
         productName: "chrome_launcher"
       }
