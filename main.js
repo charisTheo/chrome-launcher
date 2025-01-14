@@ -2,10 +2,6 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
 const fs = require('fs');
 
-try {
-  require('electron-reloader')(module)
-} catch (_) {}
-
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,

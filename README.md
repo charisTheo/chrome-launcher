@@ -20,3 +20,11 @@
 ```sh
 npm i && npm start
 ```
+
+### Develop locally
+
+```sh
+npm run dev
+```
+
+> This command launches the app and registers a file watcher that will reload the app on each change saved.
