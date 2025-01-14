@@ -25,8 +25,12 @@ app.whenReady().then(async () => {
           console.error(`Error executing command: ${error}`);
           return;
         }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
+        if (stdout) {
+          console.log(`stdout: ${stdout}`);
+        }
+        if (stderr) {
+          console.error(`stderr: ${stderr}`);
+        }
         res()
       });
     })
@@ -68,7 +72,11 @@ ipcMain.on('run-command', async (event, command) => {
       console.error(`Error executing script: ${error}`);
       return;
     }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
+    if (stdout) {
+      console.log(`stdout: ${stdout}`);
+    }
+    if (stderr) {
+      console.error(`stderr: ${stderr}`);
+    }
   });
 });
