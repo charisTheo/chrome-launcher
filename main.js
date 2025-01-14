@@ -18,6 +18,28 @@ function createWindow() {
   });
 
   win.loadFile('index.html');
+
+
+  ipcMain.on('run-command', async (event, command) => {
+    const shellPath = await getShellPath()
+    const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
+
+    // send command back to renderer to notify that command has finished
+    win.webContents.send('end-command', command);
+    
+    exec(`source ~/${shellProfileFilename} && ${command}`, { shell: shellPath }, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing script: ${error}`);
+        return;
+      }
+      if (stdout) {
+        console.log(`stdout: ${stdout}`);
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+      }
+    });
+  });
 }
 
 app.whenReady().then(async () => {
@@ -62,17 +84,3 @@ function getShellPath() {
 function getShellProfileFilenameFromPath(shellPath) {
   return `.${shellPath.split('/bin/').pop().trim()}rc`
 }
-
-ipcMain.on('run-command', async (event, command) => {
-  const shellPath = await getShellPath()
-  const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
-
-  exec(`source ~/${shellProfileFilename} && ${command}`, { shell: shellPath }, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing script: ${error}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
-  });
-});
