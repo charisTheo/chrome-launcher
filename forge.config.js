@@ -40,6 +40,17 @@ module.exports = {
         name: APP_NAME,
         productName: APP_NAME
       }
+    },
+    {
+      name: '@electron-forge/maker-deb',
+      config: {
+        options: {
+          homepage: 'https://github.com/charisTheo/chrome-launcher',
+          name: EXECUTABLE_NAME,
+          productName: APP_NAME,
+          icon: APP_ICON_PATH + '.png'
+        }
+      }
     }
   ]
 }

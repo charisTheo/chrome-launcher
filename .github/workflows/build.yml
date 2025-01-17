@@ -2,10 +2,10 @@ name: build
 
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-    branches:
-      - main
+    # tags:
+    #   - 'v[0-9]+.[0-9]+.[0-9]+'
+    # branches:
+    #   - main
   pull_request:
     branches:
       - develop
@@ -25,13 +25,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [macos-latest, ubuntu-latest]
         arch: [x64, arm64]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Import Apple Developer Certificate
+        if: ${{ matrix.os }} == 'macos-latest'
         run: |
           INSTALLER_CERTIFICATE_PATH=$RUNNER_TEMP/installer_certificate.p12
           APPLICATION_CERTIFICATE_PATH=$RUNNER_TEMP/application_certificate.p12
@@ -82,14 +83,13 @@ jobs:
         with: 
           path: artifacts
 
-      - name: Zip folders
-        run: |
-          zip -jr macOS-ARM.zip artifacts/macos-latest-arm64/make/*
-          zip -jr macOS-Intel.zip artifacts/macos-latest-x64/make/*
+      # - name: Zip folders
+      #   run: |
+      #     zip -jr macOS-ARM.zip artifacts/macos-latest-arm64/make/*
+      #     zip -jr macOS-Intel.zip artifacts/macos-latest-x64/make/*
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            macOS-ARM.zip
-            macOS-Intel.zip
+            artifacts/**/make/*
