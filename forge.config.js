@@ -6,7 +6,7 @@ const APP_NAME = "Chrome Launcher"
 const APPLE_APP_BUNDLE_ID = "com.charistheo.chromelauncher"
 const GITHUB_REPO_OWNER = "charisTheo"
 const GITHUB_REPO_NAME = "chrome-launcher"
-const EXECUTABLE_NAME = "chrome_launcher"
+const EXECUTABLE_NAME = "chrome-launcher"
 
 module.exports = {
   packagerConfig: {
