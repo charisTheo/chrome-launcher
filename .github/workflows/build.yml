@@ -40,6 +40,7 @@ jobs:
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
+          cat CERTIFICATE_PATH
           cat $CERTIFICATE_PATH
 
           security import $CERTIFICATE_PATH -P $APPLE_CERTIFICATE_PASSWORD -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
