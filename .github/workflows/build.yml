@@ -17,11 +17,6 @@ env:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    env:
-      APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE }}
-      APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE_PASSWORD }}
-      KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-
     strategy:
       matrix:
         os: [macos-latest]
@@ -33,6 +28,10 @@ jobs:
 
       - name: Import Apple Developer Certificate
         run: |
+          APPLE_CERTIFICATE_BASE64=${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD=${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD=${{ secrets.KEYCHAIN_PASSWORD }}
+
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
