@@ -21,20 +21,20 @@ jobs:
       matrix:
         os: [macos-latest]
         arch: [x64, arm64]
-    env:
-      APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE }}
-      APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE_PASSWORD }}
-      KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-      TEST_SECRET: ${{ secrets.TEST }}
-      TEST_STRING: "TEST_STRING"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Import Apple Developer Certificate
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          TEST_SECRET: ${{ secrets.TEST }}
+          TEST_STRING: "TEST_STRING"
         run: |
 
-          echo $TEST_SECRET
+          echo ${{ env.TEST_SECRET}}
           echo $TEST_STRING
           
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
