@@ -24,14 +24,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Import Apple Developer Certificate
+        env: 
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
-          APPLE_CERTIFICATE_BASE64="${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE }}"
-          APPLE_CERTIFICATE_PASSWORD="${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_CERTIFICATE_PASSWORD }}"
-          KEYCHAIN_PASSWORD="${{ secrets.KEYCHAIN_PASSWORD }}"
-
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
@@ -46,7 +46,7 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
@@ -80,7 +80,7 @@ jobs:
           zip -jr macOS-Intel.zip artifacts/macos-latest-x64/make/*
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             macOS-ARM.zip
