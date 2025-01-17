@@ -2,10 +2,6 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
 const fs = require('fs');
 
-try {
-  require('electron-reloader')(module)
-} catch (_) {}
-
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
@@ -29,8 +25,12 @@ app.whenReady().then(async () => {
           console.error(`Error executing command: ${error}`);
           return;
         }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
+        if (stdout) {
+          console.log(`stdout: ${stdout}`);
+        }
+        if (stderr) {
+          console.error(`stderr: ${stderr}`);
+        }
         res()
       });
     })
@@ -39,11 +39,7 @@ app.whenReady().then(async () => {
   createWindow()
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+app.on('window-all-closed', app.quit);
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
@@ -72,7 +68,11 @@ ipcMain.on('run-command', async (event, command) => {
       console.error(`Error executing script: ${error}`);
       return;
     }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
+    if (stdout) {
+      console.log(`stdout: ${stdout}`);
+    }
+    if (stderr) {
+      console.error(`stderr: ${stderr}`);
+    }
   });
 });

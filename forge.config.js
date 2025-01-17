@@ -2,13 +2,18 @@ require('dotenv').config()
 const path = require('path')
 
 const APP_ICON_PATH = path.join(process.cwd(), "images", "icon")
+const APP_NAME = "Chrome Launcher"
+const APPLE_APP_BUNDLE_ID = "com.charistheo.chromelauncher"
+const GITHUB_REPO_OWNER = "charisTheo"
+const GITHUB_REPO_NAME = "chrome-launcher"
+const EXECUTABLE_NAME = "chrome_launcher"
 
 module.exports = {
   packagerConfig: {
     icon: APP_ICON_PATH,
     extraResource: [APP_ICON_PATH + '.icns'],
-    executableName: "chrome_launcher",
-    appBundleId: "com.charistheo.chromelauncher",
+    executableName: EXECUTABLE_NAME,
+    appBundleId: APPLE_APP_BUNDLE_ID,
     osxSign: {},
     osxNotarize: {
       appleId: process.env.APPLE_ID,
@@ -21,8 +26,8 @@ module.exports = {
       name: "@electron-forge/publisher-github",
       config: {
         repository: {
-          owner: "charisTheo",
-          name: "chrome-launcher"
+          owner: GITHUB_REPO_OWNER,
+          name: GITHUB_REPO_NAME
         }
       }
     }
@@ -32,9 +37,8 @@ module.exports = {
       name: "@electron-forge/maker-dmg",
       config: {
         icon: APP_ICON_PATH + '.icns',
-        name: "chrome_launcher",
-        productName: "Chrome Launcher",
-        title: "Chrome Launcher",
+        name: APP_NAME,
+        productName: APP_NAME
       }
     }
   ]
