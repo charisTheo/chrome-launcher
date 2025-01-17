@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Import Apple Developer Certificate
-        if: ${{ matrix.os }} == 'macos-latest'
+        if: matrix.os == 'macos-latest'
         run: |
           INSTALLER_CERTIFICATE_PATH=$RUNNER_TEMP/installer_certificate.p12
           APPLICATION_CERTIFICATE_PATH=$RUNNER_TEMP/application_certificate.p12
