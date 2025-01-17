@@ -31,10 +31,14 @@ npm run dev
 
 ## Release
 
-New releases will only be executed by Github Actions after pushing a commit and a tag on the `main` branch:
+New releases will only be executed by Github Actions on any of the following cases:
+1. new tag push
+2. new pull request on `develop` branch
 
 Example:
 ```sh
+# starting from the `develop` branch
+git merge main
 git checkout main
 git merge develop
 npm version minor
