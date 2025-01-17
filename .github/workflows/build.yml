@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-${{ matrix.arch }}
-          path: out/
+          path: out/make/
 
   release:
     runs-on: ubuntu-latest
@@ -91,13 +91,8 @@ jobs:
         with: 
           path: artifacts
 
-      # - name: Zip folders
-      #   run: |
-      #     zip -jr macOS-ARM.zip artifacts/macos-latest-arm64/make/*
-      #     zip -jr macOS-Intel.zip artifacts/macos-latest-x64/make/*
-
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/**/make/*
+            artifacts/
