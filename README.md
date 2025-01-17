@@ -28,3 +28,15 @@ npm run dev
 ```
 
 > This command launches the app and registers a file watcher that will reload the app on each change saved.
+
+## Release
+
+New releases will only be executed by Github Actions after pushing a commit and a tag on the `main` branch:
+
+Example:
+```sh
+git checkout main
+git merge develop
+npm version minor
+git push --follow-tags
+```
