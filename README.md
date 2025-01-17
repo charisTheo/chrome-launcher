@@ -20,3 +20,15 @@
 ```sh
 npm i && npm start
 ```
+
+## Release
+
+New releases will only be executed by Github Actions after pushing a commit and a tag on the `main` branch:
+
+Example:
+```sh
+git checkout main
+git merge develop
+npm version minor
+git push --follow-tags
+```
