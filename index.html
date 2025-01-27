@@ -104,46 +104,38 @@ limitations under the License. -->
     @keyframes fade { 
       0%{opacity:0.2} 50%{opacity:1} 100%{opacity:0.2}
     }
-    [id*='3pcd'] {
+    [id*='default'] {
       --color: #4caf50;
       --color-opacity: #4caf5066;
     }
-    [id*='default'] {
+    [id*='3pcd'] {
       --color: #f44336;
       --color-opacity: #f4433666;
     }
   </style>
 </head>
 <body>
-
-  <main>
-    <button id="default">
-      <img class='image-chrome' src='./images/chrome-logo.svg' />
-      <img class='image-cookie' src='./images/cookie.svg' />
-      <span class='title'>Chrome Default</span>
-    </button>
+    <main>
+      <button id="default">
+        <img class='image-chrome' src='./images/chrome-logo.svg' />
+        <span class='title'>Chrome Default</span>
+      </button>
+      
+      <button id="3pcd">
+        <img class='image-chrome' src='./images/chrome-logo.svg' />
+        <span class='title'>Chrome w/ Disabled Cookies</span>
+      </button>
     
-    <button id="3pcd">
-      <img class='image-chrome' src='./images/chrome-logo.svg' />
-      <img class='image-cookie' src='./images/cookie-off.svg' />
-      <span class='title'>Chrome w/ Disabled Cookies</span>
-    </button>
-  
-    <button id="default-ps">
-      <img class='image-chrome' src='./images/chrome-logo.svg' />
-      <img class='image-psat' src='./images/psat-logo.svg' />
-      <img class='image-cookie' src='./images/cookie.svg' />
-      <span class='title'>Chrome w/ PSAT</span>
-    </button>
-    
-    <button id="3pcd-ps">
-      <img class='image-chrome' src='./images/chrome-logo.svg' />
-      <img class='image-psat' src='./images/psat-logo.svg' />
-      <img class='image-cookie' src='./images/cookie-off.svg' />
-      <span class='title'>Chrome w/ PSAT & Disabled Cookies</span>
-    </button>
-  </main>
-  
+      <button id="default-ps">
+        <img class='image-chrome' src='./images/chrome-logo.svg' />
+        <span class='title'>Chrome w/ PSAT</span>
+      </button>
+      
+      <button id="3pcd-ps">
+        <img class='image-chrome' src='./images/chrome-logo.svg' />
+        <span class='title'>Chrome w/ PSAT & Disabled Cookies</span>
+      </button>
+    </main>
   <script src="./renderer.js"></script>
 </body>
 </html>
