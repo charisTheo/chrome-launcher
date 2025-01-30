@@ -1,6 +1,6 @@
 {
   "name": "chrome-launcher",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Chrome Launcher",
   "main": "main.js",
   "license": "Apache-2.0",
