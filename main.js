@@ -21,7 +21,6 @@ function createWindow() {
 
   win.loadFile('index.html');
 
-
   ipcMain.on('run-command', async (event, command) => {
     const shellPath = await getShellPath()
     const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
@@ -83,21 +82,3 @@ function getShellPath() {
 function getShellProfileFilenameFromPath(shellPath) {
   return `.${shellPath.split('/bin/').pop().trim()}rc`
 }
-
-ipcMain.on('run-command', async (event, command) => {
-  const shellPath = await getShellPath()
-  const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
-
-  exec(`source ~/${shellProfileFilename} && ${command}`, { shell: shellPath }, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing script: ${error}`);
-      return;
-    }
-    if (stdout) {
-      console.log(`stdout: ${stdout}`);
-    }
-    if (stderr) {
-      console.error(`stderr: ${stderr}`);
-    }
-  });
-});
