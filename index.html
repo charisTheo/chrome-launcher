@@ -41,9 +41,10 @@ limitations under the License. -->
       transform: translateY(-50%);
     }
 
-    button {
+    button, label {
       --button-padding: 12px;
       --button-gap: 6px;
+      cursor: pointer;
       font-family: inherit;
       display: flex;
       flex-direction: column;
@@ -82,22 +83,6 @@ limitations under the License. -->
       text-wrap: balance;
       font-weight: 500;
     }
-    .image-psat,
-    .image-cookie {
-      --size: 50px;
-    }
-    .image-psat {
-      position: absolute;
-      top: 4px;
-      right: 4px;
-    }
-    .image-cookie {
-      position: absolute;
-      left: 50%;
-      top: calc(50% - var(--button-padding) - var(--button-gap));
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(0px 3px 2px rgb(0 0 0 / 0.3))
-    }
     .fading {
       animation:fade 1500ms infinite;
     }
@@ -112,6 +97,37 @@ limitations under the License. -->
       --color: #f44336;
       --color-opacity: #f4433666;
     }
+
+    .config-container {
+      flex: 1 1 100%;
+      text-align: center;
+      margin-top: 24px;
+    }
+    .config {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .config-label {
+      padding: 4px 8px;
+      flex-direction: row;
+      border-style: solid;
+      --color: #a4c2f460;
+      --color-opacity: transparent;
+      &:hover {
+        background-color: var(--color-opacity);
+      }
+      &:has(input:checked) {
+        --color: #4384f5ff;
+        --color-opacity: #a4c2f460;
+      }
+    }
+
+    [target="_blank"]:after {
+      content: "↗";
+      margin-left: 2px;
+    }
   </style>
 </head>
 <body>
@@ -125,16 +141,19 @@ limitations under the License. -->
         <img class='image-chrome' src='./images/chrome-logo.svg' />
         <span class='title'>Chrome w/ Disabled Cookies</span>
       </button>
-    
-      <button id="default-ps">
-        <img class='image-chrome' src='./images/chrome-logo.svg' />
-        <span class='title'>Chrome w/ PSAT</span>
-      </button>
-      
-      <button id="3pcd-ps">
-        <img class='image-chrome' src='./images/chrome-logo.svg' />
-        <span class='title'>Chrome w/ PSAT & Disabled Cookies</span>
-      </button>
+
+      <div class="config-container">
+        <div class="config">
+          <label class='config-label'>
+            <img height="40" src='./images/psat-logo.svg' />
+            Use PSAT Extension
+            <input type="checkbox" name="psat-extension" id="psat-extension" checked />
+          </label>
+          <small>
+            <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki" target="_blank">Learn more</a>
+          </small>
+        </div>
+      </div>
     </main>
   <script src="./renderer.js"></script>
 </body>

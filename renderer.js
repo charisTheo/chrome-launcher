@@ -6,6 +6,8 @@
 
 const { ipcRenderer } = require('electron');
 
+const psatExtensionCheckbox = document.querySelector('#psat-extension')
+
 function addFading(el) {
   console.log('🪲 | addFading');
   el.classList.add("fading");
@@ -18,35 +20,19 @@ function stopFading(el) {
 const COMMAND_TO_ELEMENT_ID_MAP = {
   'chrome-default': 'default',
   'chrome-3pcd': '3pcd',
-  'chrome-default-ps': 'default-ps',
-  'chrome-3pcd-ps': '3pcd-ps',
 }
 
 document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-default']).addEventListener('click', () => {
   const el = document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-default']);
   addFading(el);
-  ipcRenderer.send('run-command', 'chrome-default');
+  ipcRenderer.send('run-command', psatExtensionCheckbox.checked ? 'chrome-default-ps' : 'chrome-default');
   stopFading(el);
 });
 
 document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-3pcd']).addEventListener('click', () => {
   const el = document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-3pcd']);
   addFading(el);
-  ipcRenderer.send('run-command', 'chrome-3pcd');
-  stopFading(el);
-});
-
-document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-default-ps']).addEventListener('click', () => {
-  const el = document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-default-ps']);
-  addFading(el);
-  ipcRenderer.send('run-command', 'chrome-default-ps');
-  stopFading(el);
-});
-
-document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-3pcd-ps']).addEventListener('click', () => {
-  const el = document.getElementById(COMMAND_TO_ELEMENT_ID_MAP['chrome-3pcd-ps']);
-  addFading(el);
-  ipcRenderer.send('run-command', 'chrome-3pcd-ps');
+  ipcRenderer.send('run-command', psatExtensionCheckbox.checked ? 'chrome-3pcd-ps' : 'chrome-3pcd');
   stopFading(el);
 });
 
