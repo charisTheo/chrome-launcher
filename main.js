@@ -6,7 +6,6 @@
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
-const fs = require('fs');
 
 function createWindow() {
   const win = new BrowserWindow({
