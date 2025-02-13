@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { exec } = require('child_process');
 
 function createWindow() {
@@ -19,6 +19,14 @@ function createWindow() {
   });
 
   win.loadFile('index.html');
+  // Open links in external browser
+  win.webContents.setWindowOpenHandler((details) => {
+    if (details.url) {
+      shell.openExternal(details.url);
+      return { action: 'deny' }
+    }
+    return { action: 'allow' }
+  })
 
   ipcMain.on('run-command', async (event, command) => {
     const shellPath = await getShellPath()
